@@ -5,7 +5,10 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isAppInitialised = false;
     private TextView title_label;
     private int currentMode;
+    private ImageButton drawer_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.container);
         title_label = findViewById(R.id.title_label);
+        drawer_btn = findViewById(R.id.drawer_btn);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -67,7 +72,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
+        drawer_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
         requestPerm();
     }
 
